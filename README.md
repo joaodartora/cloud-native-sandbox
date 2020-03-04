@@ -1,5 +1,3 @@
-# cloud-native-sandbox
-Codes, POC's and studies from different Cloud Native tools/frameworks
 # Cloud Native Sandbox
 
 - In this repository are all the development codes i'm using to learn about a variety of Cloud Native tools and frameworks.
