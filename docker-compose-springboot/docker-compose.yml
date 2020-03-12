@@ -1,0 +1,17 @@
+version: '3'
+services:
+  github:
+    image: github
+    ports:
+      - "8282:8080" 
+
+  twitter:
+    image: twitter
+    ports:
+      - "8181:8080"
+
+  totalizer:
+    image: totalizer
+    ports:
+      - "8080:8080"  
+
