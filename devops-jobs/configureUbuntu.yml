@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: root
+  tasks:
+
+   - name: Update apt
+     command: "apt -y update"
+
+   - name: Install java8
+     command: "apt -y install openjdk-8-jdk"
+
+   - name: Download Tomcat
+     get_url: url=http://mirror.nbtelecom.com.br/apache/tomcat/tomcat-9/v9.0.20/bin/apache-tomcat-9.0.20.tar.gz dest=/opt/
+
+   - name: Unzip Tomcat
+     unarchive: src=/opt/apache-tomcat-9.0.20.tar.gz dest=/opt/

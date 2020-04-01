@@ -1,0 +1,44 @@
+{
+    "builders": [{
+        "type": "docker",
+        "image": "ubuntu:16.04",
+	"commit": true,
+	"pull": false,
+        "changes": [
+            "EXPOSE 8031",	
+            "ENTRYPOINT /opt/apache-tomcat-9.0.20/bin/catalina.sh run"
+        ]
+    }],
+
+    "provisioners": [
+    {
+        "type": "shell",
+        "script": "installAnsible.sh"
+    },
+    {
+        "type": "ansible-local",
+        "playbook_file": "configureUbuntu.yml"
+    },
+    {
+	"type": "file",
+ 	"source": "final-1-job1-unspecified.war",
+  	"destination": "/opt/apache-tomcat-9.0.20/webapps/"
+    }
+    ],
+
+    "post-processors": [
+        [
+            {
+               "type": "docker-tag",
+               "repository": "joaodartora/devops-jobs",
+               "tag": "devops-jobs-packer-image"
+            },
+            {
+               "type": "docker-push",
+               "login": "true",
+               "login_username": "user",
+               "login_password": "password"
+            }
+        ]
+    ]
+}
